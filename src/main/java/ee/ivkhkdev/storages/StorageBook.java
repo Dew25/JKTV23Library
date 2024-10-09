@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StorageBook implements BookRepository {
-
+    public static List<Book> books;
     @Override
     public void saveBook(Book book) {
-        App.books.add(book);
+        books.add(book);
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream("books");
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(App.books);
+            objectOutputStream.writeObject(books);
             objectOutputStream.flush();
         } catch (FileNotFoundException e) {
             System.out.println("Нет такого файла: "+e.toString());

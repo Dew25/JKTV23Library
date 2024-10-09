@@ -1,7 +1,7 @@
 package ee.ivkhkdev.services;
 
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.services.helpers.BookDataInput;
+import ee.ivkhkdev.helpers.BookDataInput;
 
 import java.util.Scanner;
 

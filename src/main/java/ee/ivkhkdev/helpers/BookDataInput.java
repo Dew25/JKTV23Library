@@ -1,4 +1,4 @@
-package ee.ivkhkdev.services.helpers;
+package ee.ivkhkdev.helpers;
 
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;

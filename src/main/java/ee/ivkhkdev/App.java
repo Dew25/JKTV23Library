@@ -3,17 +3,17 @@ package ee.ivkhkdev;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.repository.BookRepository;
 import ee.ivkhkdev.services.BookService;
-import ee.ivkhkdev.services.helpers.BookDataInput;
+import ee.ivkhkdev.helpers.BookDataInput;
 import ee.ivkhkdev.storages.StorageBook;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static List<Book> books;
+
     private Scanner scanner = new Scanner(System.in);
     private BookRepository bookRepository = new StorageBook();
     public App() {
-        this.books = bookRepository.loadBooks();
+        StorageBook.books = bookRepository.loadBooks();
     }
     public void run() {
         boolean repeat = true;
