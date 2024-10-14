@@ -3,17 +3,23 @@ package ee.ivkhkdev;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.repository.BookRepository;
 import ee.ivkhkdev.services.BookService;
-import ee.ivkhkdev.helpers.BookDataInput;
+import ee.ivkhkdev.helpers.AppHelperBookDataInput;
+import ee.ivkhkdev.services.UserService;
 import ee.ivkhkdev.storages.StorageBook;
+import ee.ivkhkdev.tools.Input;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
+    private final Input input;
     private Scanner scanner = new Scanner(System.in);
-    private BookRepository bookRepository = new StorageBook();
-    public App() {
-        StorageBook.books = bookRepository.loadBooks();
+    private BookRepository bookRepository;
+
+    public App(Input input, BookRepository bookRepository) {
+        this.input = input;
+        this.bookRepository = bookRepository;
     }
     public void run() {
         boolean repeat = true;
@@ -28,16 +34,17 @@ public class App {
             System.out.println("5. Выдать книгу");
             System.out.println("6. Вернуть книгу");
             System.out.print("Выберите номер задачи из списка: ");
-            int task = Integer.parseInt(scanner.nextLine());
+            int task = Integer.parseInt(input.nextLine());
             switch (task) {
                 case 0:
                     repeat = false;
                     break;
                 case 1:
-                    BookService bookService = new BookService(scanner);
-                    bookService.addBook(new BookDataInput());
+                    BookService bookService = new BookService(input, bookRepository);
+                    bookService.addBook(new AppHelperBookDataInput());
                     break;
                 case 2:
+                    UserService userService = new UserService(scanner);
                     break;
                 case 3:
                     break;

@@ -1,10 +1,17 @@
 package ee.ivkhkdev;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import ee.ivkhkdev.repository.BookRepository;
+import ee.ivkhkdev.storages.StorageBook;
+import ee.ivkhkdev.tools.Input;
+import ee.ivkhkdev.tools.impl.ConsoleInput;
+
 public class Main {
     public static void main(String[] args) {
-        App app = new App();
+
+        BookRepository bookRepository = new StorageBook();
+        Input input = new ConsoleInput();
+
+        App app = new App(input, bookRepository);
         app.run();
     }
 }
