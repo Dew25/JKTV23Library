@@ -54,13 +54,16 @@ public class Author {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Author author = (Author) o;
-        return Objects.equals(id, author.id) && Objects.equals(firstname, author.firstname) && Objects.equals(lastname, author.lastname);
+        return Objects.equals(firstname, author.firstname) && Objects.equals(lastname, author.lastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        int result = Objects.hashCode(firstname);
+        result = 31 * result + Objects.hashCode(lastname);
+        return result;
     }
 
     @Override

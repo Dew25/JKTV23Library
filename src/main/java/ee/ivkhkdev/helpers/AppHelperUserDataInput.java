@@ -1,20 +1,21 @@
 package ee.ivkhkdev.helpers;
 
 import ee.ivkhkdev.model.User;
+import ee.ivkhkdev.tools.Input;
 
 import java.util.Scanner;
 
 public class AppHelperUserDataInput {
-    public User createUser(Scanner scanner){
+    public User createUser(Input input){
         User user = new User();
         System.out.print("Имя: ");
-        user.setFirstname(scanner.nextLine());
+        user.setFirstname(input.nextLine());
         System.out.print("Фамилия: ");
-        user.setLastname(scanner.nextLine());
+        user.setLastname(input.nextLine());
         System.out.print("Телефон: ");
-        user.setPhone(scanner.nextLine());
+        user.setPhone(input.nextLine());
         System.out.print("email: ");
-        user.setEmail(scanner.nextLine());
+        user.setEmail(input.nextLine());
         return user;
     }
 }
