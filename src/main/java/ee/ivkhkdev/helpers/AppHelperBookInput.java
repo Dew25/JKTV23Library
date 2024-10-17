@@ -4,9 +4,7 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.tools.Input;
 
-import java.util.Scanner;
-
-public class AppHelperBookDataInput {
+public class AppHelperBookInput {
     public Book createBook(Input input){
         System.out.println("===== Новая книга =====");
         Book book = new Book();

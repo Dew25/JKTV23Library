@@ -15,9 +15,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class AppHelperBookDataInputTest {
+class AppHelperBookInputTest {
     Input inputMock;
-    AppHelperBookDataInput appHelperBookDataInput = new AppHelperBookDataInput();
+    AppHelperBookInput appHelperBookInput = new AppHelperBookInput();
     @BeforeEach
     void setUp() {
         inputMock = Mockito.mock(ConsoleInput.class);
@@ -27,13 +27,13 @@ class AppHelperBookDataInputTest {
     @AfterEach
     void tearDown() {
         inputMock = null;
-        appHelperBookDataInput=null;
+        appHelperBookInput =null;
     }
 
     @Test
     void appHelperBookDataInputCreateBook() {
         when(inputMock.nextLine()).thenReturn("Voina i mir","1","Lev","Tolstoy","2000");
-        Book actual = appHelperBookDataInput.createBook(inputMock);
+        Book actual = appHelperBookInput.createBook(inputMock);
         Author author = new Author("Lev","Tolstoy");
         List<Author> authors = new ArrayList<>();
         authors.add(author);

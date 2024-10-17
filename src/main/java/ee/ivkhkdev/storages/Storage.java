@@ -1,5 +1,6 @@
 package ee.ivkhkdev.storages;
 
+import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.repository.Repository;
 
@@ -12,11 +13,13 @@ public class Storage<T> implements Repository<T> {
     private List<T> entities = new ArrayList<>();
     private String fileName = "users";
 
-    public Storage() {
+    public Storage(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override
     public void save(T entity) {
+
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {

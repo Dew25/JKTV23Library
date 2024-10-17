@@ -1,9 +1,13 @@
 package ee.ivkhkdev;
 
 import ee.ivkhkdev.helpers.AppHelperUserDataInput;
+import ee.ivkhkdev.model.Book;
+import ee.ivkhkdev.model.User;
+import ee.ivkhkdev.repository.Repository;
 import ee.ivkhkdev.services.BookService;
-import ee.ivkhkdev.helpers.AppHelperBookDataInput;
+import ee.ivkhkdev.helpers.AppHelperBookInput;
 import ee.ivkhkdev.services.UserService;
+import ee.ivkhkdev.storages.Storage;
 import ee.ivkhkdev.tools.Input;
 
 import java.util.Scanner;
@@ -37,13 +41,15 @@ public class App {
                     repeat = false;
                     break;
                 case 1:
-                    BookService bookService = new BookService(input);
-                    if(bookService.addBook(new AppHelperBookDataInput())){
+                    Repository<Book> repositoryBook = new Storage<Book>("books");
+                    BookService bookService = new BookService(input,repositoryBook);
+                    if(bookService.addBook(new AppHelperBookInput())){
                         System.out.println("Книга добавлена");
                     }
                     break;
                 case 2:
-                    UserService userService = new UserService(input);
+                    Repository<User> repositoryUser = new Storage<User>("users");
+                    UserService userService = new UserService(input, repositoryUser);
                     if(userService.addUser(new AppHelperUserDataInput())){
                         System.out.println("Читатель добавлен");
                     }
