@@ -15,6 +15,7 @@ public class Storage<T> implements Repository<T> {
 
     public Storage(String fileName) {
         this.fileName = fileName;
+        entities = this.load();
     }
 
     @Override

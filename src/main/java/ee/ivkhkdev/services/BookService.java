@@ -3,7 +3,6 @@ package ee.ivkhkdev.services;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.helpers.AppHelperBookInput;
 import ee.ivkhkdev.repository.Repository;
-import ee.ivkhkdev.storages.Storage;
 import ee.ivkhkdev.tools.Input;
 
 public class BookService {
@@ -24,5 +23,9 @@ public class BookService {
         }else{
             return false;
         }
+    }
+
+    public void books(AppHelperBookInput appHelperBookInput, Repository<Book> repositoryBook, AppHelperBookInput helperBookInput) {
+        helperBookInput.printBooks(repositoryBook.getEntities());
     }
 }

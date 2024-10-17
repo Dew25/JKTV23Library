@@ -10,18 +10,26 @@ import ee.ivkhkdev.services.UserService;
 import ee.ivkhkdev.storages.Storage;
 import ee.ivkhkdev.tools.Input;
 
-import java.util.Scanner;
-
 public class App {
 
+    Repository<User> repositoryUser;
+    Repository<Book> repositoryBook;
     private final Input input;
-    private Scanner scanner = new Scanner(System.in);
-
+    private BookService bookService;
+    private UserService userService;
+    private AppHelperBookInput appHelperBookInput;
+    private AppHelperUserDataInput appHelperUserDataInput;
 
     public App(Input input) {
         this.input = input;
-
+        repositoryUser = new Storage<>("users");
+        repositoryBook = new Storage<>("books");
+        this.bookService = new BookService(input,repositoryBook);
+        this.userService = new UserService(input,repositoryUser);
+        this.appHelperBookInput = new AppHelperBookInput();
+        this.appHelperUserDataInput = new AppHelperUserDataInput();
     }
+
     public void run() {
         boolean repeat = true;
         System.out.println("--------------- JKTV23 библиотека --------------");
@@ -41,20 +49,17 @@ public class App {
                     repeat = false;
                     break;
                 case 1:
-                    Repository<Book> repositoryBook = new Storage<Book>("books");
-                    BookService bookService = new BookService(input,repositoryBook);
-                    if(bookService.addBook(new AppHelperBookInput())){
+                    if(bookService.addBook(appHelperBookInput)){
                         System.out.println("Книга добавлена");
                     }
                     break;
                 case 2:
-                    Repository<User> repositoryUser = new Storage<User>("users");
-                    UserService userService = new UserService(input, repositoryUser);
                     if(userService.addUser(new AppHelperUserDataInput())){
                         System.out.println("Читатель добавлен");
                     }
                     break;
                 case 3:
+                    bookService.books(appHelperBookInput,repositoryBook,appHelperBookInput);
                     break;
                 case 4:
                     break;

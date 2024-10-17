@@ -4,6 +4,9 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.tools.Input;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class AppHelperBookInput {
     public Book createBook(Input input){
         System.out.println("===== Новая книга =====");
@@ -25,5 +28,22 @@ public class AppHelperBookInput {
         System.out.print("Год публикации: ");
         book.setPublishedYear(Integer.parseInt(input.nextLine()));
         return book;
+    }
+
+    public void printBooks(List<Book> entities) {
+        if(entities.isEmpty()){
+            System.out.println("--- Список книг пуст ---");
+        }else{
+            System.out.println("--- Список книг ---");
+            for (int i = 0; i < entities.size(); i++){
+                System.out.printf("%d. %s. %s. %d%n",
+                        i+1,
+                        entities.get(i).getTitle(),
+                        Arrays.toString(entities.get(i).getAuthors().toArray()),
+                        entities.get(i).getPublishedYear()
+                );
+            }
+            System.out.println("--- Конец списка ---");
+        }
     }
 }
