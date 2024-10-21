@@ -2,8 +2,8 @@ package ee.ivkhkdev.helpers;
 
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.tools.Input;
-import ee.ivkhkdev.tools.impl.ConsoleInput;
+import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.interfaces.impl.ConsoleInput;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

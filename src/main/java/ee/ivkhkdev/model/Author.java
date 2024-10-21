@@ -1,8 +1,9 @@
 package ee.ivkhkdev.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Author {
+public class Author implements Serializable {
     private static long count;
     private Long id;
     private String firstname;

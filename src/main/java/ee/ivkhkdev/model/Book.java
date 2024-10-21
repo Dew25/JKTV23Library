@@ -1,11 +1,12 @@
 package ee.ivkhkdev.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Book {
+public class Book implements Serializable {
     private static long count;
     private Long id;
     private String title;

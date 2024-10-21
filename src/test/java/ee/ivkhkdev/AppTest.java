@@ -1,16 +1,15 @@
 package ee.ivkhkdev;
 
 import ee.ivkhkdev.helpers.AppHelperBookInput;
-import ee.ivkhkdev.helpers.AppHelperUserDataInput;
-import ee.ivkhkdev.model.Author;
+import ee.ivkhkdev.helpers.AppHelperUserInput;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.repository.Repository;
 import ee.ivkhkdev.services.BookService;
 import ee.ivkhkdev.services.UserService;
 import ee.ivkhkdev.storages.Storage;
-import ee.ivkhkdev.tools.Input;
-import ee.ivkhkdev.tools.impl.ConsoleInput;
+import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.interfaces.impl.ConsoleInput;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -69,7 +68,7 @@ class AppTest {
     @Test
     void runAddUser(){
         User userMock = Mockito.mock(User.class);
-        AppHelperUserDataInput appHelperUserInputMock = Mockito.mock(AppHelperUserDataInput.class);
+        AppHelperUserInput appHelperUserInputMock = Mockito.mock(AppHelperUserInput.class);
         Repository<User> repositoryMock = mock(Storage.class);
         when(appHelperUserInputMock.createUser(inputMock)).thenReturn(userMock);
         UserService userService = new UserService(inputMock, repositoryMock);
