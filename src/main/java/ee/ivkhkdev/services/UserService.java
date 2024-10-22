@@ -22,7 +22,7 @@ public class UserService {
         this.repository = repository;
     }
     public boolean addUser(){
-        User user = appHelperUserInput.createUser(input);
+        User user = appHelperUserInput.createUser();
         if(user != null){
             users.add(user);
             repository.save(users);
@@ -32,8 +32,8 @@ public class UserService {
         }
     }
 
-    public void users(List<User> users) {
-        appHelperUserInput.printUsers(users);
+    public void users() {
+        appHelperUserInput.printUsers();
     }
 
     public Repository<User> getRepository() {

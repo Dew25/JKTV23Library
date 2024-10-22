@@ -10,24 +10,21 @@ import ee.ivkhkdev.interfaces.Input;
 import java.util.List;
 
 public class RegisterService {
-    private final Input input;
+
     private final AppHelperRegisterInput appHelperRegisterInput;
-    private final Repository<Register> repository;
-    private final List<Book> books;
-    private final List<User> users;
+    private final Repository repository;
+
     private final List<Register> registers;
 
-    public RegisterService(List<Book> books, List<User> users, List<Register> registers, Input input, Repository<Register> repository, AppHelperRegisterInput appHelperRegisterInput) {
-        this.books = books;
-        this.users = users;
+
+    public RegisterService(List<Register> registers, Repository repository, AppHelperRegisterInput appHelperRegisterInput) {
         this.registers = registers;
-        this.input = input;
         this.repository = repository;
         this.appHelperRegisterInput = appHelperRegisterInput;
     }
 
-    public boolean bookBorrow(List<Book> books, UserService userService, BookService bookService) {
-        Register register = appHelperRegisterInput.bookBorrow(books,users, registers, input, userService, bookService);
+    public boolean bookBorrow() {
+        Register register = appHelperRegisterInput.bookBorrow();
         if(register != null) {
             registers.add(register);
             repository.save(registers);
@@ -37,7 +34,7 @@ public class RegisterService {
         }
     }
 
-    public boolean returnBook(Input input, List<Register> registers) {
-        return appHelperRegisterInput.returnBookDialog(input, registers);
+    public boolean returnBook() {
+        return appHelperRegisterInput.returnBookDialog();
     }
 }

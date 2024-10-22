@@ -10,12 +10,10 @@ import java.util.List;
 
 public class Storage<T> implements Repository<T> {
 
-    //private List<T> entities;
-    private String fileName = "users";
+    private String fileName;
 
     public Storage(String fileName) {
         this.fileName = fileName;
-        //entities = this.load();
     }
 
     @Override
@@ -52,19 +50,4 @@ public class Storage<T> implements Repository<T> {
         return new ArrayList<T>();
     }
 
-//    public List<T> getEntities() {
-//        return entities;
-//    }
-//
-//    public void setUsers(List<T> entities) {
-//        this.entities = entities;
-//    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 }

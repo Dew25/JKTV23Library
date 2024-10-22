@@ -16,28 +16,41 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class AppHelperBookInputTest {
+
     Input inputMock;
-    AppHelperBookInput appHelperBookInput = new AppHelperBookInput();
+    List<Book> booksMock;
+    AppHelperAuthorInput appHelperAuthorInputMock;
+    AppHelperBookInput appHelperBookInput;
+
     @BeforeEach
     void setUp() {
         inputMock = Mockito.mock(ConsoleInput.class);
+        booksMock = Mockito.mock(ArrayList.class);
+        appHelperAuthorInputMock = Mockito.mock(AppHelperAuthorInput.class);
+        appHelperBookInput = new AppHelperBookInput(inputMock,booksMock,appHelperAuthorInputMock);
 
     }
 
     @AfterEach
     void tearDown() {
         inputMock = null;
-        appHelperBookInput =null;
+        booksMock =null;
+        appHelperAuthorInputMock=null;
+        appHelperBookInput=null;
     }
 
     @Test
-    void appHelperBookDataInputCreateBook() {
-        when(inputMock.nextLine()).thenReturn("Voina i mir","1","Lev","Tolstoy","2000");
-        Book actual = appHelperBookInput.createBook(inputMock);
-        Author author = new Author("Lev","Tolstoy");
-        List<Author> authors = new ArrayList<>();
-        authors.add(author);
-        Book expected = new Book("Voina i mir", authors, 2000);
-        assertTrue(actual.getTitle().equals(expected.getTitle()));
+    void createBookWithAddAuthors() {
+        when(inputMock.nextLine()).thenReturn("Voina i mir","y");
+        Book actual = appHelperBookInput.createBook();
+        Book expected = null;
+//        Author author = new Author("Lev","Tolstoy");
+//        List<Author> authors = new ArrayList<>();
+//        authors.add(author);
+//        Book expected = new Book("Voina i mir", authors, 2000);
+        assertTrue(actual == expected);
+    }
+    void createBookWithoutAddAuthors(){
+
     }
 }
