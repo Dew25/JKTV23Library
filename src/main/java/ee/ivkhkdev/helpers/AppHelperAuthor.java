@@ -2,21 +2,19 @@ package ee.ivkhkdev.helpers;
 
 import ee.ivkhkdev.interfaces.Input;
 import ee.ivkhkdev.model.Author;
-import ee.ivkhkdev.model.Book;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class AppHelperAuthorInput {
+public class AppHelperAuthor implements AppHelper<Author>{
     private final Input input;
     private final List<Author> authors;
 
-    public AppHelperAuthorInput(Input input, List<Author> authors) {
+    public AppHelperAuthor(Input input, List<Author> authors) {
         this.input = input;
         this.authors = authors;
     }
-
-    public Author createAuthor(){
+    @Override
+    public Author create(){
         try {
             System.out.println("===== Новый автор =====");
             Author author = new Author();
@@ -30,14 +28,14 @@ public class AppHelperAuthorInput {
             return null;
         }
     }
-
-    public void printAuthors() {
+    @Override
+    public void printList() {
         if (authors.isEmpty()){
             System.out.println(" --- Список пуст --- ");
         } else {
             System.out.println(" --- Список авторов --- ");
             for (int i = 0; i < authors.size(); i++){
-                System.out.printf("%d. %s  %s%n",
+                System.out.printf("%d. %s %s%n",
                     i+1,
                     authors.get(i).getFirstname(),
                     authors.get(i).getLastname()
@@ -47,7 +45,8 @@ public class AppHelperAuthorInput {
         }
     }
 
-    public List<Author> getAuthors() {
+    @Override
+    public List<Author> getList() {
         return authors;
     }
 }

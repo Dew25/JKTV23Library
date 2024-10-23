@@ -1,22 +1,20 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.interfaces.Input;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class AppHelperUserInput {
+public class AppHelperUser implements AppHelper<User>{
     private final Input input;
     private final List<User> users;
 
-    public AppHelperUserInput(Input input, List<User> users) {
+    public AppHelperUser(Input input, List<User> users) {
         this.input = input;
         this.users = users;
     }
-
-    public User createUser(){
+    @Override
+    public User create(){
         User user = new User();
         System.out.print("Имя: ");
         user.setFirstname(input.nextLine());
@@ -28,7 +26,8 @@ public class AppHelperUserInput {
         user.setEmail(input.nextLine());
         return user;
     }
-    public void printUsers() {
+    @Override
+    public void printList() {
         if (users.isEmpty()) {
             System.out.println(" --- Список читателей пуст --- ");
         } else {
@@ -44,5 +43,10 @@ public class AppHelperUserInput {
             }
             System.out.println(" --- Конец списка --- ");
         }
+    }
+
+    @Override
+    public List<User> getList() {
+        return users;
     }
 }

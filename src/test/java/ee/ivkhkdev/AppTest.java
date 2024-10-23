@@ -1,26 +1,7 @@
 package ee.ivkhkdev;
 
-import ee.ivkhkdev.helpers.AppHelperBookInput;
-import ee.ivkhkdev.helpers.AppHelperUserInput;
-import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
-import ee.ivkhkdev.services.BookService;
-import ee.ivkhkdev.services.UserService;
-import ee.ivkhkdev.storages.Storage;
-import ee.ivkhkdev.interfaces.Input;
-import ee.ivkhkdev.interfaces.impl.ConsoleInput;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
 
 
 class AppTest {
@@ -56,7 +37,7 @@ class AppTest {
 //    }
 //   @Test
 //    void runAddBook(){
-//        AppHelperBookInput appHelperBookInputMock = mock(AppHelperBookInput.class);
+//        AppHelperBook appHelperBookInputMock = mock(AppHelperBook.class);
 //        Book bookMock = Mockito.mock(Book.class);
 //        when(appHelperBookInputMock.createBook()).thenReturn(bookMock);
 //        Repository<Book> repositoryMock = Mockito.mock(Storage.class);
@@ -68,7 +49,7 @@ class AppTest {
 //    //@Test
 //    void runAddUser(){
 //        User userMock = Mockito.mock(User.class);
-//        AppHelperUserInput appHelperUserInputMock = Mockito.mock(AppHelperUserInput.class);
+//        AppHelperUser appHelperUserInputMock = Mockito.mock(AppHelperUser.class);
 //        Repository<User> repositoryMock = mock(Storage.class);
 //        when(appHelperUserInputMock.createUser(inputMock)).thenReturn(userMock);
 //        UserService userService = new UserService(inputMock, repositoryMock);

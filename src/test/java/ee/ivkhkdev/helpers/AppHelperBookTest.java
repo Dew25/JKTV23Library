@@ -15,19 +15,19 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class AppHelperBookInputTest {
+class AppHelperBookTest {
 
     Input inputMock;
     List<Book> booksMock;
-    AppHelperAuthorInput appHelperAuthorInputMock;
-    AppHelperBookInput appHelperBookInput;
+    AppHelperAuthor appHelperAuthorMock;
+    AppHelperBook appHelperBook;
 
     @BeforeEach
     void setUp() {
         inputMock = Mockito.mock(ConsoleInput.class);
         booksMock = Mockito.mock(ArrayList.class);
-        appHelperAuthorInputMock = Mockito.mock(AppHelperAuthorInput.class);
-        appHelperBookInput = new AppHelperBookInput(inputMock,booksMock,appHelperAuthorInputMock);
+        appHelperAuthorMock = Mockito.mock(AppHelperAuthor.class);
+        appHelperBook = new AppHelperBook(inputMock,booksMock, appHelperAuthorMock);
 
     }
 
@@ -35,14 +35,14 @@ class AppHelperBookInputTest {
     void tearDown() {
         inputMock = null;
         booksMock =null;
-        appHelperAuthorInputMock=null;
-        appHelperBookInput=null;
+        appHelperAuthorMock =null;
+        appHelperBook =null;
     }
 
     @Test
     void createBookWithAddAuthors() {
         when(inputMock.nextLine()).thenReturn("Voina i mir","y");
-        Book actual = appHelperBookInput.createBook();
+        Book actual = appHelperBook.create();
         Book expected = null;
 //        Author author = new Author("Lev","Tolstoy");
 //        List<Author> authors = new ArrayList<>();
@@ -50,7 +50,18 @@ class AppHelperBookInputTest {
 //        Book expected = new Book("Voina i mir", authors, 2000);
         assertTrue(actual == expected);
     }
-    void createBookWithoutAddAuthors(){
 
+    @Test
+    void createBookWithoutAddAuthors() {
+        when(inputMock.nextLine()).thenReturn("Voina i mir","n","1","1","2000");
+        List<Author>authors = new ArrayList<>();
+        authors.add(new Author("Lev","Tolstoy"));
+        when(appHelperAuthorMock.getList()).thenReturn(authors);
+        Book actual = appHelperBook.create();
+        Book expected = new Book("Voina i mir", authors, 2000);
+
+        assertEquals(actual.getTitle(), expected.getTitle());
     }
+
+
 }

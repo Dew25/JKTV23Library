@@ -5,21 +5,22 @@ import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.services.BookService;
+import ee.ivkhkdev.services.Service;
 import ee.ivkhkdev.services.UserService;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-public class AppHelperRegisterInput {
+public class AppHelperRegister implements AppHelper<Register>{
     private final List<Book> books;
     private final List<User> users;
     private final List<Register> registers;
     private final Input input;
-    private final UserService userService;
-    private final BookService bookService;
+    private final Service userService;
+    private final Service bookService;
 
-    public AppHelperRegisterInput(List<Book> books, List<User> users, List<Register> registers, Input input, UserService userService, BookService bookService) {
+    public AppHelperRegister(List<Book> books, List<User> users, List<Register> registers, Input input, Service userService, Service bookService) {
         this.books = books;
         this.users = users;
         this.registers = registers;
@@ -27,15 +28,15 @@ public class AppHelperRegisterInput {
         this.userService = userService;
         this.bookService = bookService;
     }
-
-    public Register bookBorrow() {
+    @Override
+    public Register create() {
         try {
             Register register = new Register();
-            userService.users();
+            userService.print();
             System.out.print("Введите номер пользователя из списка: ");
             int numberUser = Integer.parseInt(input.nextLine());
             User user = users.get(numberUser-1);
-            bookService.books();
+            bookService.print();
             System.out.print("Введите номер книги из списка: ");
             int numberBook = Integer.parseInt(input.nextLine());
             Book book = books.get(numberBook-1);
@@ -48,7 +49,7 @@ public class AppHelperRegisterInput {
         }
     }
 
-    public void printListBorrowedBooks(){
+    public void printList(){
         if (registers.isEmpty()){
             System.out.println(" --- Список выданных книг пуст --- ");
         } else {
@@ -68,9 +69,14 @@ public class AppHelperRegisterInput {
         }
     }
 
+    @Override
+    public List<Register> getList() {
+        return registers;
+    }
+
     public boolean returnBookDialog() {
         try {
-            printListBorrowedBooks();
+            this.printList();
             System.out.print("Выберите номер возвращаемой книги: ");
             int numberReturnBookRegister = Integer.parseInt(input.nextLine());
             registers.get(numberReturnBookRegister - 1).setReturnBookDate(LocalDate.now());
