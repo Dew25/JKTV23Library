@@ -1,17 +1,17 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
 
 import java.util.List;
 
 public class AppHelperAuthor implements AppHelper<Author>{
     private final Input input;
-    private final List<Author> authors;
 
-    public AppHelperAuthor(Input input, List<Author> authors) {
+
+    public AppHelperAuthor(Input input) {
         this.input = input;
-        this.authors = authors;
+
     }
     @Override
     public Author create(){
@@ -29,9 +29,10 @@ public class AppHelperAuthor implements AppHelper<Author>{
         }
     }
     @Override
-    public void printList() {
-        if (authors.isEmpty()){
+    public boolean printList(List<Author> authors) {
+        if (authors == null || authors.isEmpty()){
             System.out.println(" --- Список пуст --- ");
+            return false;
         } else {
             System.out.println(" --- Список авторов --- ");
             for (int i = 0; i < authors.size(); i++){
@@ -42,11 +43,8 @@ public class AppHelperAuthor implements AppHelper<Author>{
                 );
             }
             System.out.println(" --- Конец списка --- ");
+            return true;
         }
     }
 
-    @Override
-    public List<Author> getList() {
-        return authors;
-    }
 }

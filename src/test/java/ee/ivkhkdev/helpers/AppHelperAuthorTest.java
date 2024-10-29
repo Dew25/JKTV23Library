@@ -1,6 +1,6 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ class AppHelperAuthorTest {
         author = new Author("Lev","Tolstoy");
         authors = new ArrayList<>();
         authors.add(author);
-        appHelperAuthor = new AppHelperAuthor(inputMock,authors);
+        appHelperAuthor = new AppHelperAuthor(inputMock);
     }
 
     @AfterEach
@@ -57,17 +57,12 @@ class AppHelperAuthorTest {
 
     @Test
     void printList() {
-        appHelperAuthor.printList();
+        appHelperAuthor.printList(authors);
         String expectid ="Lev Tolstoy";
 //        System.setOut(outDefault);
 //        System.out.println(outMock.toString());
         assertTrue(outMock.toString().contains(expectid));
     }
 
-    @Test
-    void getList() {
-        List<Author> actual = appHelperAuthor.getList();
-        List<Author> expectid = authors;
-        assertTrue(actual.get(0).getFirstname().contains(expectid.get(0).getFirstname()));
-    }
+
 }

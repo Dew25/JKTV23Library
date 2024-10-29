@@ -1,8 +1,4 @@
-package ee.ivkhkdev.storages;
-
-import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
+package ee.ivkhkdev.repository;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,7 +13,26 @@ public class Storage<T> implements Repository<T> {
     }
 
     @Override
-    public void save(List<T> entities) {
+    public void save(T entity) {
+        List<T> entities = this.load();
+        if(entities == null) {entities = new ArrayList<>();}
+        entities.add(entity);
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(fileName);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(entities);
+            objectOutputStream.flush();
+        } catch (FileNotFoundException e) {
+            System.out.println("Нет такого файла: "+e.toString());
+        } catch (IOException e) {
+            System.out.println("Ошибка ввода/вывода: "+e.toString());
+        }
+    }
+    @Override
+    public void saveAll(List<T> entities) {
+        if(entities == null) {entities = new ArrayList<>();}
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {

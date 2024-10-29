@@ -1,15 +1,11 @@
 package ee.ivkhkdev;
 
-import ee.ivkhkdev.helpers.*;
-import ee.ivkhkdev.interfaces.impl.ConsoleInput;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
 import ee.ivkhkdev.services.*;
-import ee.ivkhkdev.storages.Storage;
-import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.input.Input;
 
 import java.util.List;
 
@@ -20,40 +16,23 @@ public class App {
     List<Register> registers;
 
     private final Input input;
-    private final Repository<Book> repositoryBook;
-    private final Repository<Author> repositoryAuthor;
-    private final Repository<User> repositoryUser;
-    private final Repository<Register> repositoryRegister;
-
     private final Service<Book> bookService;
     private final Service<Author> authorService;
     private final Service<User> userService;
     private final Service<Register> registerService;
 
-    private final AppHelper<Book> appHelperBook;
-    private final AppHelper<Author> appHelperAuthor;
-    private final AppHelper<User> appHelperUser;
-    private final AppHelper<Register> appHelperRegister;
-
-
-    public App() {
-        this.input = new ConsoleInput();
-        this.repositoryBook = new Storage<>("books");
-        this.repositoryAuthor = new Storage<>("authors");
-        this.repositoryUser = new Storage<>("users");
-        this.repositoryRegister = new Storage<>("registers");
-        users = repositoryUser.load();
-        authors = repositoryAuthor.load();
-        books = repositoryBook.load();
-        registers = repositoryRegister.load();
-        this.appHelperAuthor = new AppHelperAuthor(input, authors);
-        this.appHelperBook = new AppHelperBook(input,books, appHelperAuthor);
-        this.appHelperUser = new AppHelperUser(input, users);
-        this.bookService = new BookService(books, input, appHelperBook, repositoryBook);
-        this.authorService = new AuthorService(authors, input, appHelperAuthor, repositoryAuthor);
-        this.userService = new UserService(users, input, appHelperUser, repositoryUser);
-        this.appHelperRegister = new AppHelperRegister(books,users,registers,input,userService,bookService);
-        this.registerService = new RegisterService(registers, repositoryRegister, appHelperRegister);
+    public App(
+            Input input,
+            Service<Book> bookService,
+            Service<Author> authorService,
+            Service<User> userService,
+            Service<Register> registerService
+            ) {
+        this.input =input;
+        this.bookService = bookService;
+        this.authorService =authorService;
+        this.userService = userService;
+        this.registerService =registerService;
     }
 
     public void run() {

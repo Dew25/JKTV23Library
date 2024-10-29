@@ -10,22 +10,18 @@ import java.util.List;
 public class RegisterService implements Service<Register>{
 
     private final AppHelper<Register> appHelperRegister;
-    private final Repository repository;
-
-    private final List<Register> registers;
+    private final Repository<Register> repositoryRegister;
 
 
-    public RegisterService(List<Register> registers, Repository repository, AppHelper<Register> appHelperRegister) {
-        this.registers = registers;
-        this.repository = repository;
+    public RegisterService(AppHelper<Register> appHelperRegister,Repository<Register> repositoryRegister) {
         this.appHelperRegister = appHelperRegister;
+        this.repositoryRegister=repositoryRegister;
     }
     @Override
     public boolean add() {
         Register register = appHelperRegister.create();
         if(register != null) {
-            registers.add(register);
-            repository.save(registers);
+            repositoryRegister.save(register);
             return true;
         }else{
             return false;
@@ -43,16 +39,22 @@ public class RegisterService implements Service<Register>{
     }
 
     @Override
-    public void print() {
-        appHelperRegister.printList();
+    public boolean print() {
+        return appHelperRegister.printList(getRepository().load());
     }
 
     @Override
     public Repository<Register> getRepository() {
-        return repository;
+        return repositoryRegister;
     }
 
     public boolean returnBook() {
-        return ((AppHelperRegister) appHelperRegister).returnBookDialog();
+        List<Register> registerList = ((AppHelperRegister) appHelperRegister).returnBookDialog(getRepository().load());
+        if(registerList != null){
+            getRepository().saveAll(registerList);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

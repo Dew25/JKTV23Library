@@ -4,6 +4,5 @@ import java.util.List;
 
 public interface AppHelper<T> {
     T create();
-    void printList();
-    List<T> getList();
+    boolean printList(List<T>entities);
 }

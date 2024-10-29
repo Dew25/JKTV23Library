@@ -1,7 +1,7 @@
 package ee.ivkhkdev.services;
 
 import ee.ivkhkdev.helpers.AppHelper;
-import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.repository.Repository;
 
@@ -10,12 +10,12 @@ import java.util.List;
 public class AuthorService implements Service<Author> {
     private final Input input;
     private final AppHelper<Author> appHelperAuthor;
-    private final Repository<Author> repository;
+    private final Repository<Author> repositoryAuthor;
     private List<Author> authors;
 
-    public AuthorService(List<Author> authors, Input input, AppHelper<Author> appHelperAuthor, Repository<Author> repository) {
+    public AuthorService(Input input, AppHelper<Author> appHelperAuthor, Repository<Author> repositoryAuthor) {
         this.input = input;
-        this.repository = repository;
+        this.repositoryAuthor = repositoryAuthor;
         this.appHelperAuthor = appHelperAuthor;
         this.authors = authors;
 
@@ -24,8 +24,7 @@ public class AuthorService implements Service<Author> {
     public boolean add(){
         Author author = appHelperAuthor.create();
         if(author != null) {
-            authors.add(author);
-            repository.save(authors);
+            repositoryAuthor.save(author);
             return true;
         }else{
             return false;
@@ -43,11 +42,12 @@ public class AuthorService implements Service<Author> {
     }
 
     @Override
-    public void print() {
-        appHelperAuthor.printList();
+    public boolean print() {
+        return appHelperAuthor.printList(repositoryAuthor.load());
     }
+
     @Override
     public Repository<Author> getRepository() {
-        return repository;
+        return repositoryAuthor;
     }
 }

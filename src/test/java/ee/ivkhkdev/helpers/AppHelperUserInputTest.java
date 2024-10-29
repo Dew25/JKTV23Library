@@ -1,16 +1,5 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.interfaces.Input;
-import ee.ivkhkdev.interfaces.impl.ConsoleInput;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
 class AppHelperUserInputTest {
 
 //    Input inputMock;

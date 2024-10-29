@@ -1,17 +1,15 @@
 package ee.ivkhkdev.helpers;
 
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.input.Input;
 
 import java.util.List;
 
 public class AppHelperUser implements AppHelper<User>{
     private final Input input;
-    private final List<User> users;
 
-    public AppHelperUser(Input input, List<User> users) {
+    public AppHelperUser(Input input) {
         this.input = input;
-        this.users = users;
     }
     @Override
     public User create(){
@@ -27,9 +25,10 @@ public class AppHelperUser implements AppHelper<User>{
         return user;
     }
     @Override
-    public void printList() {
-        if (users.isEmpty()) {
+    public boolean printList(List<User> users) {
+        if (users == null || users.isEmpty()) {
             System.out.println(" --- Список читателей пуст --- ");
+            return false;
         } else {
             System.out.println(" --- Список читателей --- ");
             for (int i = 0; i < users.size(); i++) {
@@ -42,11 +41,8 @@ public class AppHelperUser implements AppHelper<User>{
                 );
             }
             System.out.println(" --- Конец списка --- ");
+            return true;
         }
     }
 
-    @Override
-    public List<User> getList() {
-        return users;
-    }
 }
