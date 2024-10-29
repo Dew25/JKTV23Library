@@ -23,15 +23,16 @@ class AppHelperBookTest {
     Input inputMock;
     AppHelperBook appHelperBook;
     Service<Author> authorServiceMock;
-
+    private Repository<Author> authorRepository;
 
 
     @BeforeEach
     void setUp() {
         inputMock = Mockito.mock(ConsoleInput.class);
         authorServiceMock = Mockito.mock(AuthorService.class);
+        authorRepository=Mockito.mock(Repository.class);
+        when(authorServiceMock.getRepository()).thenReturn(authorRepository);
         appHelperBook = new AppHelperBook(inputMock,authorServiceMock);
-
     }
 
     @AfterEach
@@ -44,36 +45,44 @@ class AppHelperBookTest {
     void testCreate_NewBookCreatedSuccessfully() {
         Book book = new Book();
         List<Author> authors = new ArrayList<>();
-        Author author = new Author("John", "Doe");
+        Author author = new Author("Lev", "Tolstoy");
         authors.add(author);
 
         // Мокируем ввод пользователя
-        when(inputMock.nextLine()).thenReturn("Book title", "n", "1", "1", "2000");
+        when(inputMock.nextLine()).thenReturn("Voina i mir", "n", "1", "1", "2000");
         when(authorServiceMock.getRepository().load()).thenReturn(authors);
 
         Book createdBook = appHelperBook.create();
 
         assertNotNull(createdBook);
-        assertEquals("Book Title", createdBook.getTitle());
-        assertEquals(2023, createdBook.getPublishedYear());
+        assertEquals("Voina i mir", createdBook.getTitle());
+        assertEquals(2000, createdBook.getPublishedYear());
         assertEquals(1, createdBook.getAuthors().size());
         assertEquals(author, createdBook.getAuthors().get(0));
     }
-
-//   // @Test
-//    void createBookWithoutAddAuthors() {
-////        when(inputMock.nextLine()).thenReturn("Voina i mir","n","1","1","2000");
-////        List<Author>authors = new ArrayList<>();
-////        authors.add(new Author("Lev","Tolstoy"));
-////
-////        Service<Author> authorServise = Mockito.mock(AuthorService.class);
-////
-////        when(repositoryAuthorMock.load()).thenReturn(authors);
-////        Book actual = appHelperBook.create();
-////        Book expected = new Book("Voina i mir", authors, 2000);
-////
-////        assertEquals(actual.getTitle(), expected.getTitle());
-//    }
-
+    @Test
+    void testCreate_CreationCancelledByAuthor(){
+        when(inputMock.nextLine()).thenReturn("Voina i mir","y");
+        Book createdBook = appHelperBook.create();
+        assertNull(createdBook);
+    }
+    @Test
+    void testPrintList_WithBooks(){
+        List<Book> books = new ArrayList<>();
+        Author author = new Author("Lev","Tolstoy");
+        Book book = new Book();
+        book.setPublishedYear(2000);
+        book.setTitle("Voina i mir");
+        book.getAuthors().add(author);
+        books.add(book);
+        boolean result = appHelperBook.printList(books);
+        assertTrue(result);
+    }
+    @Test
+    void testPrintList_EmptyList(){
+        List<Book> emptyBooks = new ArrayList<>();
+        boolean result = appHelperBook.printList(emptyBooks);
+        assertFalse(result);
+    }
 
 }
