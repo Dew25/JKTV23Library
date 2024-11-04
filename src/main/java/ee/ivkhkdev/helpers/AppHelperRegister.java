@@ -73,7 +73,12 @@ public class AppHelperRegister implements AppHelper<Register>{
 
     }
 
-     public List<Register> returnBookDialog(List<Register> registers) {
+    @Override
+    public List<Register> editEntities(List<Register> entities) {
+        return List.of();
+    }
+
+    public List<Register> returnBookDialog(List<Register> registers) {
         try {
             if(!this.printList(registers)) return null;
             System.out.print("Выберите номер возвращаемой книги: ");

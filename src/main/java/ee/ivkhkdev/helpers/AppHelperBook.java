@@ -73,5 +73,10 @@ public class AppHelperBook implements AppHelper<Book>{
         }
     }
 
+    @Override
+    public List<Book> editEntities(List<Book> entities) {
+        return List.of();
+    }
+
 
 }

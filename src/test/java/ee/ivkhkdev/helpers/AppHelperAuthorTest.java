@@ -63,6 +63,22 @@ class AppHelperAuthorTest {
 //        System.out.println(outMock.toString());
         assertTrue(outMock.toString().contains(expectid));
     }
+    @Test
+    void editAuthor_WithReturnEditedAuthors(){
+        List<Author> authors = List.of(new Author("firsname","lastname"));
+        when(inputMock.nextLine()).thenReturn("1","y","firstname2","y","lastname2");
+        List<Author> resultAuthors = appHelperAuthor.editEntities(authors);
+        assertEquals(resultAuthors.get(0).getFirstname(), "firstname2");
+        assertEquals(resultAuthors.get(0).getLastname(), "lastname2");
+    }
+    @Test
+    void editAuthor_WithReturnNotEditedAuthors(){
+        List<Author> authors = List.of(new Author("firstname","lastname"));
+        when(inputMock.nextLine()).thenReturn("1","n","n");
+        List<Author> resultAuthors = appHelperAuthor.editEntities(authors);
+        assertEquals(resultAuthors.get(0).getFirstname(), "firstname");
+        assertEquals(resultAuthors.get(0).getLastname(), "lastname");
+    }
 
 
 }

@@ -47,4 +47,26 @@ public class AppHelperAuthor implements AppHelper<Author>{
         }
     }
 
+    @Override
+    public List<Author> editEntities(List<Author> entities) {
+        printList(entities);
+        System.out.println("Bыберите номер автора для редактирования: ");
+        int numberAuthor = Integer.parseInt(input.nextLine());
+        System.out.println( "Имя автора: "+entities.get(numberAuthor - 1).getFirstname());
+        System.out.println("Изменить (y/n): ");
+        String changeFirstname = input.nextLine();
+        if(changeFirstname.equals("y")){
+            System.out.println("Новое имя автора: ");
+            entities.get(numberAuthor - 1).setFirstname(input.nextLine());
+        }
+        System.out.println( "Фамилия автора: "+entities.get(numberAuthor - 1).getFirstname());
+        System.out.println("Изменить (y/n): ");
+        String changeLastname = input.nextLine();
+        if(changeLastname.equals("y")){
+            System.out.println("Новая фамилия автора: ");
+            entities.get(numberAuthor - 1).setLastname(input.nextLine());
+        }
+        return entities;
+    }
+
 }

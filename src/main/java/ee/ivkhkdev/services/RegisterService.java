@@ -50,11 +50,11 @@ public class RegisterService implements Service<Register>{
 
     public boolean returnBook() {
         List<Register> registerList = ((AppHelperRegister) appHelperRegister).returnBookDialog(getRepository().load());
-        if(registerList != null){
-            getRepository().saveAll(registerList);
-            return true;
-        }else{
+        if(registerList == null) {
             return false;
         }
+        getRepository().saveAll(registerList);
+        return true;
+
     }
 }

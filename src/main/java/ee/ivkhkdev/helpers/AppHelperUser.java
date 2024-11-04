@@ -45,4 +45,10 @@ public class AppHelperUser implements AppHelper<User>{
         }
     }
 
+    @Override
+    public List<User> editEntities(List<User> entities) {
+
+        return List.of();
+    }
+
 }

@@ -21,12 +21,12 @@ public class UserService implements Service<User>{
     public boolean add(){
         User user = appHelperUser.create();
         List<User> users = repositoryUser.load();
-        if(user != null){
-            repositoryUser.save(user);
-            return true;
-        }else{
+        if(user == null) {
             return false;
         }
+        repositoryUser.save(user);
+        return true;
+
     }
 
     @Override
