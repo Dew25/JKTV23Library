@@ -6,10 +6,14 @@ import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.services.*;
 import ee.ivkhkdev.input.Input;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 
-public class App {
+@SpringBootApplication
+public class App implements CommandLineRunner {
     List<Book> books;
     List<Author> authors;
     List<User> users;
@@ -21,6 +25,8 @@ public class App {
     private final Service<User> userService;
     private final Service<Register> registerService;
 
+
+    @Autowired
     public App(
             Input input,
             Service<Book> bookService,
@@ -35,7 +41,12 @@ public class App {
         this.registerService =registerService;
     }
 
-    public void run() {
+    public static void main(String[] args) {
+        SpringApplication.run(App.class,args);
+    }
+
+     @Override
+     public void run(String... args) throws Exception {
         boolean repeat = true;
         System.out.println("--------------- JKTV23 библиотека --------------");
         do {
@@ -102,4 +113,6 @@ public class App {
         System.out.println("До свидания!");
 
     }
+
+
 }
