@@ -10,36 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.util.List;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {
-    List<Book> books;
-    List<Author> authors;
-    List<User> users;
-    List<Register> registers;
 
-    private final Input input;
-    private final Service<Book> bookService;
-    private final Service<Author> authorService;
-    private final Service<User> userService;
-    private final Service<Register> registerService;
+    @Autowired private  Input input;
+    @Autowired private  AppService<Book> bookService;
+    @Autowired private  AppService<Author> authorService;
+    @Autowired private  AppService<User> userService;
+    @Autowired private  AppService<Register> registerService;
 
 
-    @Autowired
-    public App(
-            Input input,
-            Service<Book> bookService,
-            Service<Author> authorService,
-            Service<User> userService,
-            Service<Register> registerService
-            ) {
-        this.input =input;
-        this.bookService = bookService;
-        this.authorService =authorService;
-        this.userService = userService;
-        this.registerService =registerService;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(App.class,args);

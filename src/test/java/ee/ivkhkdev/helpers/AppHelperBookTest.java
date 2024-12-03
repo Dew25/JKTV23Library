@@ -4,9 +4,9 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.input.ConsoleInput;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.services.AuthorService;
-import ee.ivkhkdev.services.Service;
+import ee.ivkhkdev.services.AppService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,18 +21,17 @@ import static org.mockito.Mockito.when;
 class AppHelperBookTest {
 
     Input inputMock;
-    AppHelperBook appHelperBook;
-    Service<Author> authorServiceMock;
-    private Repository<Author> authorRepository;
+    AppHelperBookImpl appHelperBook;
+    AppService<Author> authorServiceMock;
+    private AppRepository<Author> authorRepository;
 
 
     @BeforeEach
     void setUp() {
         inputMock = Mockito.mock(ConsoleInput.class);
         authorServiceMock = Mockito.mock(AuthorService.class);
-        authorRepository=Mockito.mock(Repository.class);
-        when(authorServiceMock.getRepository()).thenReturn(authorRepository);
-        appHelperBook = new AppHelperBook(inputMock,authorServiceMock);
+        authorRepository=Mockito.mock(AppRepository.class);
+        appHelperBook = new AppHelperBookImpl();
     }
 
     @AfterEach
@@ -50,7 +49,7 @@ class AppHelperBookTest {
 
         // Мокируем ввод пользователя
         when(inputMock.nextLine()).thenReturn("Voina i mir", "n", "1", "1", "2000");
-        when(authorServiceMock.getRepository().load()).thenReturn(authors);
+        when(authorRepository.load()).thenReturn(authors);
 
         Book createdBook = appHelperBook.create();
 

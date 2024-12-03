@@ -1,9 +1,10 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
-import ee.ivkhkdev.helpers.AppHelperRegister;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.AppHelperRegisterImpl;
 import ee.ivkhkdev.model.Register;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.repository.RegisterRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +15,13 @@ import static org.mockito.Mockito.*;
 
 class RegisterServiceTest {
     private AppHelper<Register> appHelperRegister;
-    private Repository<Register> repositoryRegister;
+    private RegisterRepository repositoryRegister;
     private RegisterService registerService;
 
     @BeforeEach
     void setUp() {
-        appHelperRegister = mock(AppHelperRegister.class); // Using AppHelperRegister mock
-        repositoryRegister = mock(Repository.class);
+        appHelperRegister = mock(AppHelperRegisterImpl.class); // Using AppHelperRegisterImpl mock
+        repositoryRegister = mock(RegisterRepository.class);
         registerService = new RegisterService(appHelperRegister, repositoryRegister);
     }
     @Test
@@ -64,7 +65,7 @@ class RegisterServiceTest {
     @Test
     void getRepository_ShouldReturnRepository() {
         // Act
-        Repository<Register> result = registerService.getRepository();
+        AppRepository<Register> result = registerService.getRepository();
 
         // Assert
         assertTrue(result == repositoryRegister);
@@ -73,7 +74,7 @@ class RegisterServiceTest {
     void returnBook_WhenRegisterListIsNotNull_ShouldSaveAllAndReturnTrue() {
         // Arrange
         List<Register> registers = List.of(new Register(), new Register());
-        when(((AppHelperRegister) appHelperRegister).returnBookDialog(anyList())).thenReturn(registers);
+        when(((AppHelperRegisterImpl) appHelperRegister).returnBookDialog(anyList())).thenReturn(registers);
 
         // Act
         boolean result = registerService.returnBook();
@@ -85,7 +86,7 @@ class RegisterServiceTest {
     @Test
     void returnBook_WhenRegisterListIsNull_ShouldNotSaveAndReturnFalse() {
         // Arrange
-        when(((AppHelperRegister) appHelperRegister).returnBookDialog(anyList())).thenReturn(null);
+        when(((AppHelperRegisterImpl) appHelperRegister).returnBookDialog(anyList())).thenReturn(null);
 
         // Act
         boolean result = registerService.returnBook();

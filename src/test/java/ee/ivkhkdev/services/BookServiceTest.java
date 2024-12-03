@@ -1,10 +1,12 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperBook;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +17,17 @@ import static org.mockito.Mockito.*;
 
 class BookServiceTest {
     private Input input;
-    private AppHelper<Book> appHelperBook;
-    private Repository<Book> repositoryBook;
-    private Service<Author> authorService;
+    private AppHelperBook appHelperBook;
+    private BookRepository repositoryBook;
+    private AppService<Author> authorService;
     private BookService bookService;
 
     @BeforeEach
     void setUp() {
         input = mock(Input.class);
-        appHelperBook = mock(AppHelper.class);
-        repositoryBook = mock(Repository.class);
-        authorService = mock(Service.class);
+        appHelperBook = mock(AppHelperBook.class);
+        repositoryBook = mock(BookRepository.class);
+        authorService = mock(AppService.class);
         bookService = new BookService(input, appHelperBook, repositoryBook, authorService);
     }
     @Test
@@ -79,12 +81,5 @@ class BookServiceTest {
         assertFalse(result);
         verify(appHelperBook, times(1)).printList(books);
     }
-    @Test
-    void getRepository_ShouldReturnRepository() {
-        // Act
-        Repository<Book> result = bookService.getRepository();
 
-        // Assert
-        assertTrue(result == repositoryBook);
-    }
 }

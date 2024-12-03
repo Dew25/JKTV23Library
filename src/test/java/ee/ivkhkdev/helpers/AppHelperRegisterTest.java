@@ -5,9 +5,8 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
-import ee.ivkhkdev.services.Service;
-import org.junit.jupiter.api.AfterEach;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.services.AppService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,24 +19,24 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AppHelperRegisterTest {
-    AppHelperRegister appHelperRegister;
+    AppHelperRegisterImpl appHelperRegister;
     Input input;
-    Service<User> userService;
-    Service<Book> bookService;
-    Repository<User> userRepository;
-    Repository<Book> bookRepository;
+    AppService<User> userService;
+    AppService<Book> bookService;
+    AppRepository<User> userRepository;
+    AppRepository<Book> bookRepository;
     @BeforeEach
     void setUp() {
         input = mock(Input.class);
-        userService = mock(Service.class);
-        bookService = mock(Service.class);
-        userRepository = mock(Repository.class);
-        bookRepository = mock(Repository.class);
+        userService = mock(AppService.class);
+        bookService = mock(AppService.class);
+        userRepository = mock(AppRepository.class);
+        bookRepository = mock(AppRepository.class);
 
         when(userService.getRepository()).thenReturn(userRepository);
         when(bookService.getRepository()).thenReturn(bookRepository);
 
-        appHelperRegister = new AppHelperRegister(input, userService, bookService);
+        appHelperRegister = new AppHelperRegisterImpl(input, userService, bookService);
     }
 
 

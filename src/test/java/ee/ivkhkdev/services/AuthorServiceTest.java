@@ -1,9 +1,11 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperAuthor;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.repository.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,16 +16,16 @@ import static org.mockito.Mockito.*;
 
 class AuthorServiceTest {
     private Input input;
-    private AppHelper<Author> appHelperAuthor;
-    private Repository<Author> repositoryAuthor;
+    private AppHelperAuthor appHelperAuthor;
+    private AuthorRepository repositoryAuthor;
     private AuthorService authorService;
 
     @BeforeEach
     void setUp() {
         input = mock(Input.class);
-        appHelperAuthor = mock(AppHelper.class);
-        repositoryAuthor = mock(Repository.class);
-        authorService = new AuthorService(input, appHelperAuthor, repositoryAuthor);
+        appHelperAuthor = mock(AppHelperAuthor.class);
+        repositoryAuthor = mock(AuthorRepository.class);
+       // authorService = new AuthorService(input, appHelperAuthor, repositoryAuthor);
     }
     @Test
     void add_WhenAuthorIsCreated_ShouldSaveAuthorAndReturnTrue() {
@@ -66,7 +68,7 @@ class AuthorServiceTest {
     @Test
     void getRepository_ShouldReturnRepository() {
         // Act
-        Repository<Author> result = authorService.getRepository();
+        AppRepository<Author> result = authorService.getRepository();
 
         // Assert
         assertTrue(result == repositoryAuthor);

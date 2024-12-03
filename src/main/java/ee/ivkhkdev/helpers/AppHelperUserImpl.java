@@ -1,14 +1,18 @@
 package ee.ivkhkdev.helpers;
 
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperUser;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.input.Input;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-public class AppHelperUser implements AppHelper<User>{
+@Component
+public class AppHelperUserImpl implements AppHelperUser {
     private final Input input;
-
-    public AppHelperUser(Input input) {
+    @Autowired
+    public AppHelperUserImpl(Input input) {
         this.input = input;
     }
     @Override

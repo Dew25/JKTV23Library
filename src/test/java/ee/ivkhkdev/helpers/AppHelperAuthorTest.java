@@ -21,7 +21,7 @@ class AppHelperAuthorTest {
     Author authorMock;
     List<Author> authors;
     Author author;
-    AppHelperAuthor appHelperAuthor;
+    AppHelperAuthorImpl appHelperAuthor;
     PrintStream outDefault;
     ByteArrayOutputStream outMock;
 
@@ -35,7 +35,7 @@ class AppHelperAuthorTest {
         author = new Author("Lev","Tolstoy");
         authors = new ArrayList<>();
         authors.add(author);
-        appHelperAuthor = new AppHelperAuthor(inputMock);
+        appHelperAuthor = new AppHelperAuthorImpl(inputMock);
     }
 
     @AfterEach

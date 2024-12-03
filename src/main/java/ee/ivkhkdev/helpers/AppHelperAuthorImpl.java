@@ -1,15 +1,19 @@
 package ee.ivkhkdev.helpers;
 
+import ee.ivkhkdev.helpers.interfaces.AppHelperAuthor;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class AppHelperAuthor implements AppHelper<Author>{
+@Component
+public class AppHelperAuthorImpl implements AppHelperAuthor {
     private final Input input;
 
-
-    public AppHelperAuthor(Input input) {
+    @Autowired
+    public AppHelperAuthorImpl(Input input) {
         this.input = input;
 
     }

@@ -1,19 +1,22 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
-import ee.ivkhkdev.helpers.AppHelperRegister;
+import ee.ivkhkdev.helpers.AppHelperRegisterImpl;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
 import ee.ivkhkdev.model.Register;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.repository.RegisterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public class RegisterService implements AppService<Register> {
 
-public class RegisterService implements Service<Register>{
+    private  AppHelper<Register> appHelperRegister;
+    private  RegisterRepository repositoryRegister;
 
-    private final AppHelper<Register> appHelperRegister;
-    private final Repository<Register> repositoryRegister;
-
-
-    public RegisterService(AppHelper<Register> appHelperRegister,Repository<Register> repositoryRegister) {
+    @Autowired
+    public RegisterService(AppHelper<Register> appHelperRegister, RegisterRepository repositoryRegister) {
         this.appHelperRegister = appHelperRegister;
         this.repositoryRegister=repositoryRegister;
     }
@@ -40,20 +43,15 @@ public class RegisterService implements Service<Register>{
 
     @Override
     public boolean print() {
-        return appHelperRegister.printList(getRepository().load());
-    }
-
-    @Override
-    public Repository<Register> getRepository() {
-        return repositoryRegister;
+        return appHelperRegister.printList(repositoryRegister.load());
     }
 
     public boolean returnBook() {
-        List<Register> registerList = ((AppHelperRegister) appHelperRegister).returnBookDialog(getRepository().load());
+        List<Register> registerList = ((AppHelperRegisterImpl) appHelperRegister).returnBookDialog(repositoryRegister.load());
         if(registerList == null) {
             return false;
         }
-        getRepository().saveAll(registerList);
+        repositoryRegister.saveAll(registerList);
         return true;
 
     }

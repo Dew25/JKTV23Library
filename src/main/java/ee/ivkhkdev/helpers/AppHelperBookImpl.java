@@ -1,20 +1,23 @@
 package ee.ivkhkdev.helpers;
 
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperBook;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.input.Input;
-import ee.ivkhkdev.services.Service;
+import ee.ivkhkdev.repository.AuthorRepository;
+import ee.ivkhkdev.repository.BookRepository;
+import ee.ivkhkdev.services.AppService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-public class AppHelperBook implements AppHelper<Book>{
-    private final Input input;
-    private final Service<Author> authorService;
-
-    public AppHelperBook(Input input, Service<Author> authorService) {
-        this.input = input;
-        this.authorService = authorService;
-    }
+@Component
+public class AppHelperBookImpl implements AppHelperBook {
+    @Autowired private BookRepository bookRepository;
+    @Autowired private Input input;
+    @Autowired private AppService<Author> authorService;
+    @Autowired private AuthorRepository authorRepository;
 
     @Override
     public Book create(){
@@ -35,7 +38,7 @@ public class AppHelperBook implements AppHelper<Book>{
             for (int i = 0; i < countAuthors; i++){
                 System.out.printf("Выберите номер автора из списка (автор %d из %d): ",i+1,countAuthors);
                 int numberAuthorInList = Integer.parseInt(input.nextLine());
-                book.getAuthors().add(authorService.getRepository().load().get(numberAuthorInList-1));
+                book.getAuthors().add(authorRepository.load().get(numberAuthorInList-1));
             }
             System.out.print("Год публикации книги: ");
             book.setPublishedYear(Integer.parseInt(input.nextLine()));

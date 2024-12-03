@@ -1,26 +1,29 @@
 package ee.ivkhkdev.helpers;
 
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperRegister;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.services.Service;
+import ee.ivkhkdev.repository.BookRepository;
+import ee.ivkhkdev.repository.UserRepository;
+import ee.ivkhkdev.services.AppService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+@Component
+public class AppHelperRegisterImpl implements AppHelperRegister {
 
-public class AppHelperRegister implements AppHelper<Register>{
+    @Autowired private  Input input;
+    @Autowired private  AppService<User> userService;
+    @Autowired private  AppService<Book> bookService;
+    @Autowired private UserRepository userRepository;
+    @Autowired private BookRepository bookRepository;
 
-    private final Input input;
-    private final Service<User> userService;
-    private final Service<Book> bookService;
-
-    public AppHelperRegister(Input input, Service<User> userService, Service<Book> bookService) {
-        this.input = input;
-        this.userService = userService;
-        this.bookService = bookService;
-    }
     @Override
     public Register create() {
         try {
@@ -31,14 +34,14 @@ public class AppHelperRegister implements AppHelper<Register>{
             };
             System.out.print("Введите номер пользователя из списка: ");
             int numberUser = Integer.parseInt(input.nextLine());
-            User user = userService.getRepository().load().get(numberUser-1);
+            User user = userRepository.load().get(numberUser-1);
             if(!bookService.print()){
                 System.out.println("Нет книг");
                 return null;
             };
             System.out.print("Введите номер книги из списка: ");
             int numberBook = Integer.parseInt(input.nextLine());
-            Book book = bookService.getRepository().load().get(numberBook-1);
+            Book book = bookRepository.load().get(numberBook-1);
             register.setUser(user);
             register.setBook(book);
             register.setBookBorrowDate(LocalDate.now());

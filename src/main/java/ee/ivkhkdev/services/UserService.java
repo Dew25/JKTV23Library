@@ -1,18 +1,23 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.input.Input;
+import ee.ivkhkdev.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
+public class UserService implements AppService<User> {
 
-public class UserService implements Service<User>{
-    private final Input input;
-    private final AppHelper<User> appHelperUser;
-    private final Repository<User> repositoryUser;
+    private  Input input;
+    private  AppHelper<User> appHelperUser;
+    private  UserRepository repositoryUser;
 
-    public UserService(Input input, AppHelper<User> appHelperUser, Repository<User> repositoryUser) {
+    @Autowired
+    public UserService(Input input, AppHelper<User> appHelperUser, UserRepository repositoryUser) {
         this.input = input;
         this.appHelperUser = appHelperUser;
         this.repositoryUser = repositoryUser;
@@ -44,8 +49,5 @@ public class UserService implements Service<User>{
         return appHelperUser.printList(repositoryUser.load());
     }
 
-    @Override
-    public Repository<User> getRepository() {
-        return repositoryUser;
-    }
+
 }

@@ -1,30 +1,27 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperAuthor;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AuthorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+@Service
+public class AuthorService implements AppService<Author> {
 
-public class AuthorService implements Service<Author> {
-    private final Input input;
-    private final AppHelper<Author> appHelperAuthor;
-    private final Repository<Author> repositoryAuthor;
-    private List<Author> authors;
+    @Autowired  Input input;
+    @Autowired  AppHelperAuthor appHelperAuthor;
+    @Autowired  AuthorRepository authorRepository;
 
-    public AuthorService(Input input, AppHelper<Author> appHelperAuthor, Repository<Author> repositoryAuthor) {
-        this.input = input;
-        this.repositoryAuthor = repositoryAuthor;
-        this.appHelperAuthor = appHelperAuthor;
-        this.authors = authors;
 
-    }
+
     @Override
     public boolean add(){
         Author author = appHelperAuthor.create();
         if(author != null) {
-            repositoryAuthor.save(author);
+            authorRepository.save(author);
             return true;
         }else{
             return false;
@@ -43,11 +40,7 @@ public class AuthorService implements Service<Author> {
 
     @Override
     public boolean print() {
-        return appHelperAuthor.printList(repositoryAuthor.load());
+        return appHelperAuthor.printList(authorRepository.load());
     }
 
-    @Override
-    public Repository<Author> getRepository() {
-        return repositoryAuthor;
-    }
 }

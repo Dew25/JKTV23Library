@@ -1,19 +1,25 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelperBook;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.input.Input;
+import ee.ivkhkdev.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class BookService implements Service<Book>{
-    private final Input input;
-    private final AppHelper<Book> appHelperBook;
-    private final Repository<Book> repositoryBook;
-    private final Service<Author> authorService;
+@Service
+public class BookService implements AppService<Book>{
 
+    private  Input input;
+    private AppHelperBook appHelperBook;
+    private  BookRepository repositoryBook;
+    private  AppService<Author> authorService;
 
-    public BookService( Input input, AppHelper<Book> appHelperBook, Repository<Book> repositoryBook, Service<Author> authorService) {
+    @Autowired
+    public BookService(Input input, AppHelperBook appHelperBook, BookRepository repositoryBook, AppService<Author> authorService) {
         this.input = input;
         this.repositoryBook = repositoryBook;
         this.appHelperBook = appHelperBook;
@@ -42,12 +48,7 @@ public class BookService implements Service<Book>{
     }
     @Override
     public boolean print() {
-        return  appHelperBook.printList(this.getRepository().load());
-    }
-
-    @Override
-    public Repository<Book> getRepository() {
-        return repositoryBook;
+        return  appHelperBook.printList(this.repositoryBook.load());
     }
 
 }

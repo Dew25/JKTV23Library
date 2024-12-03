@@ -1,9 +1,10 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelper;
+import ee.ivkhkdev.helpers.interfaces.AppHelper;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.Repository;
+import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +16,14 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
     private Input input;
     private AppHelper<User> appHelperUser;
-    private Repository<User> repositoryUser;
+    private UserRepository repositoryUser;
     private UserService userService;
 
     @BeforeEach
     void setUp() {
         input = mock(Input.class);
         appHelperUser = mock(AppHelper.class);
-        repositoryUser = mock(Repository.class);
+        repositoryUser = mock(UserRepository.class);
         userService = new UserService(input, appHelperUser, repositoryUser);
     }
     @Test
@@ -67,7 +68,7 @@ class UserServiceTest {
     @Test
     void getRepository_ShouldReturnRepository() {
         // Act
-        Repository<User> result = userService.getRepository();
+        AppRepository<User> result = userService.getRepository();
 
         // Assert
         assertTrue(result == repositoryUser);

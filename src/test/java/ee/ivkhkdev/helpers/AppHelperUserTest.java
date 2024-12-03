@@ -13,12 +13,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AppHelperUserTest {
-    private AppHelperUser appHelperUser;
+    private AppHelperUserImpl appHelperUser;
     private Input input;
     @BeforeEach
     void setUp() {
         input = mock(Input.class);
-        appHelperUser = new AppHelperUser(input);
+        appHelperUser = new AppHelperUserImpl(input);
     }
 
     @Test

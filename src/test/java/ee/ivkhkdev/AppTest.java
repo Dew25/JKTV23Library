@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AppTest {
 
 //    Input inputMock;
-//    Repository repositoryMock;
+//    AppRepository repositoryMock;
 //    PrintStream defaultOut;
 //    ByteArrayOutputStream mockOut;
 //    @BeforeEach
 //    void setUp() {
 //        inputMock = Mockito.mock(ConsoleInput.class);
-//        repositoryMock = Mockito.mock(Storage.class);
+//        repositoryMock = Mockito.mock(UserRepository.class);
 //        defaultOut = System.out;
 //        mockOut = new ByteArrayOutputStream();
 //        System.setOut(new PrintStream(mockOut));
@@ -37,10 +37,10 @@ class AppTest {
 //    }
 //   @Test
 //    void runAddBook(){
-//        AppHelperBook appHelperBookInputMock = mock(AppHelperBook.class);
+//        AppHelperBookImpl appHelperBookInputMock = mock(AppHelperBookImpl.class);
 //        Book bookMock = Mockito.mock(Book.class);
 //        when(appHelperBookInputMock.createBook()).thenReturn(bookMock);
-//        Repository<Book> repositoryMock = Mockito.mock(Storage.class);
+//        AppRepository<Book> repositoryMock = Mockito.mock(UserRepository.class);
 //        BookService bookService = new BookService();
 //        boolean result = bookService.addBook();
 //        verify(repositoryMock, times(1)).save(bookMock);
@@ -49,8 +49,8 @@ class AppTest {
 //    //@Test
 //    void runAddUser(){
 //        User userMock = Mockito.mock(User.class);
-//        AppHelperUser appHelperUserInputMock = Mockito.mock(AppHelperUser.class);
-//        Repository<User> repositoryMock = mock(Storage.class);
+//        AppHelperUserImpl appHelperUserInputMock = Mockito.mock(AppHelperUserImpl.class);
+//        AppRepository<User> repositoryMock = mock(UserRepository.class);
 //        when(appHelperUserInputMock.createUser(inputMock)).thenReturn(userMock);
 //        UserService userService = new UserService(inputMock, repositoryMock);
 //        boolean result = userService.addUser(appHelperUserInputMock);
