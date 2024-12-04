@@ -1,13 +1,13 @@
 package ee.ivkhkdev.repository;
 
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.model.Author;
-import ee.ivkhkdev.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorRepository extends AppRepository<Author> {
+public class AuthorRepository implements AppRepository<Author> {
 
-    default public String getFilename() {
+    public String getFilename() {
         return "authors";
     }
 }

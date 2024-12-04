@@ -1,13 +1,12 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperRegister;
+import ee.ivkhkdev.interfaces.AppHelperRegister;
 import ee.ivkhkdev.input.Input;
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.BookRepository;
-import ee.ivkhkdev.repository.UserRepository;
+
 import ee.ivkhkdev.services.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,8 +20,8 @@ public class AppHelperRegisterImpl implements AppHelperRegister {
     @Autowired private  Input input;
     @Autowired private  AppService<User> userService;
     @Autowired private  AppService<Book> bookService;
-    @Autowired private UserRepository userRepository;
-    @Autowired private BookRepository bookRepository;
+    @Autowired private AppRepository<User> userRepository;
+    @Autowired private AppRepository<Book> bookRepository;
 
     @Override
     public Register create() {
@@ -50,7 +49,7 @@ public class AppHelperRegisterImpl implements AppHelperRegister {
             return null;
         }
     }
-
+    @Override
     public boolean printList(List<Register> registers){
         int numberBooks = 0;
         System.out.println(" --- Список выданных книг --- ");
@@ -81,6 +80,7 @@ public class AppHelperRegisterImpl implements AppHelperRegister {
         return List.of();
     }
 
+    @Override
     public List<Register> returnBookDialog(List<Register> registers) {
         try {
             if(!this.printList(registers)) return null;

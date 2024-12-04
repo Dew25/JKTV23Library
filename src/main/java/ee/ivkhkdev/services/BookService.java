@@ -1,10 +1,8 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperBook;
+import ee.ivkhkdev.interfaces.AppHelperBook;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;

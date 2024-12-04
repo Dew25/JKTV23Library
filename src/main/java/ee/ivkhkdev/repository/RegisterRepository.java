@@ -1,13 +1,13 @@
 package ee.ivkhkdev.repository;
 
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.model.Register;
-import ee.ivkhkdev.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegisterRepository extends AppRepository<Register> {
+public class RegisterRepository implements AppRepository<Register> {
 
-    default public String getFilename() {
+    public String getFilename() {
         return "register";
     }
 }

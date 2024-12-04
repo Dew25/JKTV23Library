@@ -4,7 +4,7 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.input.ConsoleInput;
-import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.services.AuthorService;
 import ee.ivkhkdev.services.AppService;
 import org.junit.jupiter.api.AfterEach;

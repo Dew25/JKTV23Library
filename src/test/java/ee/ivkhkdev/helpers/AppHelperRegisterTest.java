@@ -5,7 +5,7 @@ import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.model.Register;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.AppRepository;
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.services.AppService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,11 +32,7 @@ class AppHelperRegisterTest {
         bookService = mock(AppService.class);
         userRepository = mock(AppRepository.class);
         bookRepository = mock(AppRepository.class);
-
-        when(userService.getRepository()).thenReturn(userRepository);
-        when(bookService.getRepository()).thenReturn(bookRepository);
-
-        appHelperRegister = new AppHelperRegisterImpl(input, userService, bookService);
+        appHelperRegister = new AppHelperRegisterImpl();
     }
 
 

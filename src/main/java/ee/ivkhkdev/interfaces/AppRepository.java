@@ -1,6 +1,4 @@
-package ee.ivkhkdev.repository;
-
-import org.springframework.stereotype.Repository;
+package ee.ivkhkdev.interfaces;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,18 +12,7 @@ public interface AppRepository<T> {
         List<T> entities = this.load();
         if(entities == null) {entities = new ArrayList<>();}
         entities.add(entity);
-        FileOutputStream fileOutputStream = null;
-        ObjectOutputStream objectOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(getFilename());
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(entities);
-            objectOutputStream.flush();
-        } catch (FileNotFoundException e) {
-            System.out.println("Нет такого файла: "+e.toString());
-        } catch (IOException e) {
-            System.out.println("Ошибка ввода/вывода: "+e.toString());
-        }
+        this.saveAll(entities);
     }
 
     default public void saveAll(List<T> entities) {

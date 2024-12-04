@@ -1,12 +1,10 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperBook;
+import ee.ivkhkdev.interfaces.AppHelperBook;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.model.Book;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.repository.AuthorRepository;
-import ee.ivkhkdev.repository.BookRepository;
 import ee.ivkhkdev.services.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 public class AppHelperBookImpl implements AppHelperBook {
-    @Autowired private BookRepository bookRepository;
     @Autowired private Input input;
     @Autowired private AppService<Author> authorService;
     @Autowired private AuthorRepository authorRepository;

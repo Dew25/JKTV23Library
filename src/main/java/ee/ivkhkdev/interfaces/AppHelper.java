@@ -1,4 +1,4 @@
-package ee.ivkhkdev.helpers.interfaces;
+package ee.ivkhkdev.interfaces;
 
 import java.util.List;
 

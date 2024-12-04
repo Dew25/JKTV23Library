@@ -1,10 +1,8 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperAuthor;
+import ee.ivkhkdev.interfaces.AppHelperAuthor;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.Author;
-import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.repository.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,14 +63,7 @@ class AuthorServiceTest {
         assertTrue(result);
         verify(appHelperAuthor, times(1)).printList(authors);
     }
-    @Test
-    void getRepository_ShouldReturnRepository() {
-        // Act
-        AppRepository<Author> result = authorService.getRepository();
 
-        // Assert
-        assertTrue(result == repositoryAuthor);
-    }
     @Test
     void edit_withTrue(){
         List<Author> authors= List.of(new Author("Lev","Tolstoy"));
@@ -80,9 +71,6 @@ class AuthorServiceTest {
         when(appHelperAuthor.editEntities(authors)).thenReturn(expectedAuthors);
         List<Author> result = appHelperAuthor.editEntities(authors);
         assertEquals(result.get(0).getFirstname(),expectedAuthors.get(0).getFirstname());
-
-    }@Test
-    void edit_withFalse(){
 
     }
 

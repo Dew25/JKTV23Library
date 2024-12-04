@@ -1,13 +1,13 @@
 package ee.ivkhkdev.repository;
 
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.model.Book;
-import ee.ivkhkdev.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepository extends AppRepository<Book> {
+public class BookRepository implements AppRepository<Book> {
 
-    default public String getFilename() {
+    public String getFilename() {
         return "books";
     }
 }

@@ -1,9 +1,9 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.interfaces.AppHelper;
 import ee.ivkhkdev.helpers.AppHelperRegisterImpl;
+import ee.ivkhkdev.interfaces.AppHelperRegister;
 import ee.ivkhkdev.model.Register;
-import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.repository.RegisterRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class RegisterServiceTest {
-    private AppHelper<Register> appHelperRegister;
+    private AppHelperRegister appHelperRegister;
     private RegisterRepository repositoryRegister;
     private RegisterService registerService;
 
     @BeforeEach
     void setUp() {
-        appHelperRegister = mock(AppHelperRegisterImpl.class); // Using AppHelperRegisterImpl mock
+        appHelperRegister = mock(AppHelperRegister.class); // Using AppHelperRegisterImpl mock
         repositoryRegister = mock(RegisterRepository.class);
         registerService = new RegisterService(appHelperRegister, repositoryRegister);
     }
@@ -62,14 +62,7 @@ class RegisterServiceTest {
         assertTrue(result);
         verify(appHelperRegister, times(1)).printList(registers);
     }
-    @Test
-    void getRepository_ShouldReturnRepository() {
-        // Act
-        AppRepository<Register> result = registerService.getRepository();
 
-        // Assert
-        assertTrue(result == repositoryRegister);
-    }
     @Test
     void returnBook_WhenRegisterListIsNotNull_ShouldSaveAllAndReturnTrue() {
         // Arrange

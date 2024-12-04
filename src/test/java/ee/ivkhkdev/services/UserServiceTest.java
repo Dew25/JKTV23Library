@@ -1,9 +1,8 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
+import ee.ivkhkdev.interfaces.AppHelper;
 import ee.ivkhkdev.input.Input;
 import ee.ivkhkdev.model.User;
-import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,12 +64,5 @@ class UserServiceTest {
         assertTrue(result);
         verify(appHelperUser, times(1)).printList(users);
     }
-    @Test
-    void getRepository_ShouldReturnRepository() {
-        // Act
-        AppRepository<User> result = userService.getRepository();
 
-        // Assert
-        assertTrue(result == repositoryUser);
-    }
 }

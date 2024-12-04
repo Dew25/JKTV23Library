@@ -15,8 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App implements CommandLineRunner {
 
     @Autowired private  Input input;
-    @Autowired private  AppService<Book> bookService;
     @Autowired private  AppService<Author> authorService;
+    @Autowired private  AppService<Book> bookService;
     @Autowired private  AppService<User> userService;
     @Autowired private  AppService<Register> registerService;
 

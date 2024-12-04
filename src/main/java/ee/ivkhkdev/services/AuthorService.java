@@ -1,8 +1,6 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperAuthor;
-import ee.ivkhkdev.input.Input;
+import ee.ivkhkdev.interfaces.AppHelperAuthor;
 import ee.ivkhkdev.model.Author;
 import ee.ivkhkdev.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthorService implements AppService<Author> {
 
-    @Autowired  Input input;
-    @Autowired  AppHelperAuthor appHelperAuthor;
-    @Autowired  AuthorRepository authorRepository;
-
-
+    @Autowired
+    private AppHelperAuthor appHelperAuthor;
+    @Autowired
+    private AuthorRepository authorRepository;
 
     @Override
     public boolean add(){

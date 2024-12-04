@@ -1,7 +1,6 @@
 package ee.ivkhkdev.helpers;
 
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
-import ee.ivkhkdev.helpers.interfaces.AppHelperUser;
+import ee.ivkhkdev.interfaces.AppHelperUser;
 import ee.ivkhkdev.model.User;
 import ee.ivkhkdev.input.Input;
 import org.springframework.beans.factory.annotation.Autowired;

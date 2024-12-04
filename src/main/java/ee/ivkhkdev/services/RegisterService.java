@@ -1,9 +1,10 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.helpers.AppHelperRegisterImpl;
-import ee.ivkhkdev.helpers.interfaces.AppHelper;
+
+import ee.ivkhkdev.interfaces.AppHelper;
+import ee.ivkhkdev.interfaces.AppHelperRegister;
+import ee.ivkhkdev.interfaces.AppRepository;
 import ee.ivkhkdev.model.Register;
-import ee.ivkhkdev.repository.AppRepository;
 import ee.ivkhkdev.repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class RegisterService implements AppService<Register> {
-
-    private  AppHelper<Register> appHelperRegister;
-    private  RegisterRepository repositoryRegister;
+    @Autowired
+    private AppHelperRegister appHelperRegister;
+    @Autowired
+    private AppRepository<Register> repositoryRegister;
 
     @Autowired
-    public RegisterService(AppHelper<Register> appHelperRegister, RegisterRepository repositoryRegister) {
+    public RegisterService(AppHelperRegister appHelperRegister, RegisterRepository repositoryRegister) {
         this.appHelperRegister = appHelperRegister;
         this.repositoryRegister=repositoryRegister;
     }
@@ -47,7 +49,7 @@ public class RegisterService implements AppService<Register> {
     }
 
     public boolean returnBook() {
-        List<Register> registerList = ((AppHelperRegisterImpl) appHelperRegister).returnBookDialog(repositoryRegister.load());
+        List<Register> registerList = appHelperRegister.returnBookDialog(repositoryRegister.load());
         if(registerList == null) {
             return false;
         }
